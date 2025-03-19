@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35527.113 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Route.Mvc.PL", "Route.Mvc.PL\Route.Mvc.PL.csproj", "{E7748770-3957-4201-AC04-7B81BAA2FDCC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Route.Mvc.BusinessLL", "Route.Mvc.BusinessLL\Route.Mvc.BusinessLL.csproj", "{694B4BC4-046C-4560-BF18-D0F43DE0C792}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Route.Mvc.DAL", "Route.Mvc.DAL\Route.Mvc.DAL.csproj", "{D3203DF9-404B-45D5-970A-4A3D2044E5C8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E7748770-3957-4201-AC04-7B81BAA2FDCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7748770-3957-4201-AC04-7B81BAA2FDCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7748770-3957-4201-AC04-7B81BAA2FDCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7748770-3957-4201-AC04-7B81BAA2FDCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{694B4BC4-046C-4560-BF18-D0F43DE0C792}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{694B4BC4-046C-4560-BF18-D0F43DE0C792}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{694B4BC4-046C-4560-BF18-D0F43DE0C792}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{694B4BC4-046C-4560-BF18-D0F43DE0C792}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3203DF9-404B-45D5-970A-4A3D2044E5C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3203DF9-404B-45D5-970A-4A3D2044E5C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3203DF9-404B-45D5-970A-4A3D2044E5C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3203DF9-404B-45D5-970A-4A3D2044E5C8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
