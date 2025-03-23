@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+
 using Route.Mvc.BusinessLL.DataTransferObjects.Department;
 using Route.Mvc.BusinessLL.Services.Interfaces;
 using Route.Mvc.PL.ViewModels.DepartmentsViewModels;
@@ -252,6 +253,3 @@ namespace Route.Mvc.PL.Controllers
 
 
 
-
-    }
-}
