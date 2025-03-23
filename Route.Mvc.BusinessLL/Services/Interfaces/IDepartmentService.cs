@@ -1,6 +1,6 @@
 ﻿using Route.Mvc.BusinessLL.DataTransferObjects.Department;
 
-namespace Route.Mvc.BusinessLL.Services
+namespace Route.Mvc.BusinessLL.Services.Interfaces
 {
     public interface IDepartmentService
     {

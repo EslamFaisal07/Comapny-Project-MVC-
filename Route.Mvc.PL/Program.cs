@@ -1,6 +1,9 @@
 using Microsoft.EntityFrameworkCore;
+using Route.Mvc.BusinessLL.Services.Classes;
+using Route.Mvc.BusinessLL.Services.Interfaces;
 using Route.Mvc.DAL.Data.Contexts;
-using Route.Mvc.DAL.Repositories;
+using Route.Mvc.DAL.Repositories.Classes;
+using Route.Mvc.DAL.Repositories.Interfaces;
 
 namespace Route.Mvc.PL
 {
@@ -21,8 +24,11 @@ namespace Route.Mvc.PL
 
 
             builder.Services.AddScoped<IDepartmentRepository , DepartmentRepository>();
+            builder.Services.AddScoped<IDepartmentService , DepartmentService>();
 
 
+            builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 
 
 
