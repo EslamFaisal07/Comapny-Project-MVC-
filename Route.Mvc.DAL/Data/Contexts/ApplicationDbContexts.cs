@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Route.Mvc.DAL.Models.DepartmentModel;
+using Route.Mvc.DAL.Models.EmployeeModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -26,6 +28,7 @@ namespace Route.Mvc.DAL.Data.Contexts
 
 
         public DbSet<Department> Departments { get; set; }
+        public DbSet<Employee> Employees { get; set; }
 
 
 

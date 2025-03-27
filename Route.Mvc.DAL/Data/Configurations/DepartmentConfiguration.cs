@@ -1,11 +1,12 @@
 ﻿global using Microsoft.EntityFrameworkCore;
 global using Microsoft.EntityFrameworkCore.Metadata.Builders;
 global using Route.Mvc.DAL.Models;
+using Route.Mvc.DAL.Models.DepartmentModel;
 
- 
+
 namespace Route.Mvc.DAL.Data.Configurations
 {
-    internal class DepartmentConfiguration : IEntityTypeConfiguration<Department>
+    internal class DepartmentConfiguration :BaseEntityConfigurations<Department>, IEntityTypeConfiguration<Department>
     {
         public void Configure(EntityTypeBuilder<Department> builder)
         {
@@ -13,12 +14,7 @@ namespace Route.Mvc.DAL.Data.Configurations
 
             builder.Property(d=>d.Name).HasColumnType("varchar(20)");
             builder.Property(d=>d.Code).HasColumnType("varchar(20)");
-
-            builder.Property(d=>d.CreatedOn).HasDefaultValueSql("GETDATE()");
-
-            builder.Property(d=>d.LastModifiedOn).HasComputedColumnSql("GETDATE()");
-
-
+            base.Configure(builder);
 
 
         }

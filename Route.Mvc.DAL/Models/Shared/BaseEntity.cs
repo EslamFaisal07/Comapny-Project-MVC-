@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Route.Mvc.DAL.Models
+namespace Route.Mvc.DAL.Models.Shared
 {
     public class BaseEntity
     {

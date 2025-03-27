@@ -1,13 +1,14 @@
 ﻿using Route.Mvc.BusinessLL.DataTransferObjects.Department;
 using Route.Mvc.BusinessLL.Factories;
-using Route.Mvc.DAL.Repositories;
+using Route.Mvc.BusinessLL.Services.Interfaces;
+using Route.Mvc.DAL.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Route.Mvc.BusinessLL.Services
+namespace Route.Mvc.BusinessLL.Services.Classes
 {
     public class DepartmentService(IDepartmentRepository _departmentRepository) : IDepartmentService
     {

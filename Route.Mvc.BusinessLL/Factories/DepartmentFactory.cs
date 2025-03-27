@@ -1,5 +1,5 @@
 ﻿using Route.Mvc.BusinessLL.DataTransferObjects.Department;
-using Route.Mvc.DAL.Models;
+using Route.Mvc.DAL.Models.DepartmentModel;
 
 namespace Route.Mvc.BusinessLL.Factories
 {
