@@ -17,9 +17,9 @@ namespace Route.Mvc.DAL.Repositories.Classes
         public IEnumerable<T> GetAll(bool WithTracking = false)
         {
             if (WithTracking)
-                return _dbContext.Set<T>().ToList();
+                return _dbContext.Set<T>().Where(e=>e.IsDeleted != true).ToList();
             else
-                return _dbContext.Set<T>().AsNoTracking().ToList();
+                return _dbContext.Set<T>().AsNoTracking().Where(e => e.IsDeleted != true).ToList();
         }
 
 
@@ -53,6 +53,15 @@ namespace Route.Mvc.DAL.Repositories.Classes
             _dbContext.Set<T>().Add(entity);
             return _dbContext.SaveChanges();
         }
+
+   
+
+
+
+
+
+
+
 
 
 

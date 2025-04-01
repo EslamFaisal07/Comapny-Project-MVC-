@@ -47,6 +47,10 @@ namespace Route.Mvc.BusinessLL.Factories
                 HiringDate = DateOnly.FromDateTime(employee.HiringDate),
                 Gender = employee.Gender.ToString(),
                 EmployeeType = employee.EmployeeType.ToString(),
+                CreatedBy = 1,
+                CreatedOn = employee.CreatedOn.Value,
+                LastModifiedBy = 1,
+                LastModifiedOn = employee.LastModifiedOn.Value
             };
 
 
@@ -86,17 +90,17 @@ namespace Route.Mvc.BusinessLL.Factories
             return new Employee
             {
                 Name = updatedEmployeeDto.Name,
-                Age = updatedEmployeeDto.Age,
+                Age = updatedEmployeeDto.Age.Value,
                 Address = updatedEmployeeDto.Address,
                 Email = updatedEmployeeDto.Email,
                 Salary = updatedEmployeeDto.Salary,
                 IsActive = updatedEmployeeDto.IsActive,
                 PhoneNumber = updatedEmployeeDto.PhoneNumber,
                 HiringDate = updatedEmployeeDto.HiringDate.ToDateTime(new TimeOnly()),
-                Gender = Enum.Parse<Gender>(updatedEmployeeDto.Gender),
-                EmployeeType = Enum.Parse<EmployeeType>(updatedEmployeeDto.EmployeeType),
-                CreatedBy = updatedEmployeeDto.CreatedBy,
-                LastModifiedBy = updatedEmployeeDto.LastModifiedBy
+                Gender = Enum.Parse<Gender>(updatedEmployeeDto.Gender.ToString()),
+                EmployeeType = Enum.Parse<EmployeeType>(updatedEmployeeDto.EmployeeType.ToString()),
+                //CreatedBy = updatedEmployeeDto.CreatedBy,
+                //LastModifiedBy = updatedEmployeeDto.LastModifiedBy
             };
         }
     }

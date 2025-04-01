@@ -1,6 +1,8 @@
-﻿using Route.Mvc.BusinessLL.DataTransferObjects.Employee;
+﻿using AutoMapper;
+using Route.Mvc.BusinessLL.DataTransferObjects.Employee;
 using Route.Mvc.BusinessLL.Factories;
 using Route.Mvc.BusinessLL.Services.Interfaces;
+using Route.Mvc.DAL.Models.EmployeeModel;
 using Route.Mvc.DAL.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -10,27 +12,36 @@ using System.Threading.Tasks;
 
 namespace Route.Mvc.BusinessLL.Services.Classes
 {
-    public class EmployeeService(IEmployeeRepository _employeeRepository) : IEmployeeService
+    public class EmployeeService(IEmployeeRepository _employeeRepository, IMapper _mapper) : IEmployeeService
     {
         public IEnumerable<EmployeeDto> GetAllEmployees()
         {
             var employees = _employeeRepository.GetAll();
-            return employees.Select(e=>e.ToEmployeeDto());
-            
+            var employeesDto = _mapper.Map<IEnumerable<Employee>, IEnumerable<EmployeeDto>>(employees);
+            return employeesDto;
+
 
         }
 
 
 
-        public EmployeeDetailsDTO GetEmployeeById(int id)
+        public EmployeeDetailsDTO? GetEmployeeById(int id)
         {
             var employee = _employeeRepository.GetById(id);
+
+
+
+
             if (employee is null)
             {
                 return null;
             }
             else
-            return employee.ToEmployeeDetailsDto();
+            {
+            var employeeDetails = _mapper.Map<Employee, EmployeeDetailsDTO>(employee);
+
+                return employeeDetails;
+            }
         }
 
 
@@ -42,7 +53,7 @@ namespace Route.Mvc.BusinessLL.Services.Classes
 
         public int AddEmployee(CreatedEmployeeDto createdEmployeeDto)
         {
-            var employee = createdEmployeeDto.ToEntity();
+            var employee = _mapper.Map<CreatedEmployeeDto , Employee>(createdEmployeeDto);
             return _employeeRepository.Add(employee);
         }
 
@@ -52,7 +63,8 @@ namespace Route.Mvc.BusinessLL.Services.Classes
 
         public int UpdateEmployee(UpdatedEmployeeDto EmployeeDto)
         {
-            return _employeeRepository.Update(EmployeeDto.ToEntity());
+            var employee =_mapper.Map<UpdatedEmployeeDto, Employee>(EmployeeDto);
+            return _employeeRepository.Update(employee);
         }
 
 
@@ -70,7 +82,9 @@ namespace Route.Mvc.BusinessLL.Services.Classes
                 return false;
             }
             else {
-                int result = _employeeRepository.Remove(employee);
+                //int result = _employeeRepository.Remove(employee);
+                employee.IsDeleted = true;
+                int result = _employeeRepository.Update(employee);
                 return result > 0 ? true : false;
             }
             

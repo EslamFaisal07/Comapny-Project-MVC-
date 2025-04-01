@@ -5,6 +5,7 @@ using Route.Mvc.PL.ViewModels.DepartmentsViewModels;
 
 namespace Route.Mvc.PL.Controllers
 {
+
     public class DepartmentController(IDepartmentService _departmentService
         , ILogger<DepartmentController> _logger , IWebHostEnvironment _environment) : Controller
     {
@@ -27,6 +28,7 @@ namespace Route.Mvc.PL.Controllers
         }
 
         [HttpPost]
+        //[ValidateAntiForgeryToken]
         public IActionResult Create(CreatedDepartmentDto departmentDto)
         {
 
@@ -146,6 +148,7 @@ namespace Route.Mvc.PL.Controllers
 
 
         [HttpPost]
+        //[ValidateAntiForgeryToken]
 
         public IActionResult Edit(DepartmentEditViewModel viewModel , [FromRoute]int id)
         {
@@ -210,6 +213,8 @@ namespace Route.Mvc.PL.Controllers
         #region Delete
 
         [HttpPost]
+        //[ValidateAntiForgeryToken]
+
         public IActionResult Delete(int id) 
         {
         if(id == 0 ) return BadRequest();
