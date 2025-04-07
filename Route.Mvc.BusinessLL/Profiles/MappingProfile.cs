@@ -14,21 +14,24 @@ namespace Route.Mvc.BusinessLL.Profiles
 
         public MappingProfile()
         {
-            CreateMap<Employee , EmployeeDto>().ForMember(d=>d.Gender , options=>options.MapFrom(e=>e.Gender))
-                .ForMember( d=>d.EmployeeType , options=>options.MapFrom(e=>e.EmployeeType));
+               CreateMap<Employee , EmployeeDto>().ForMember(d=>d.Gender , options=>options.MapFrom(e=>e.Gender))
+                .ForMember( d=>d.EmployeeType , options=>options.MapFrom(e=>e.EmployeeType))
+                .ForMember( d=>d.Department , options=>options.MapFrom(e=>e.Department !=null ? e.Department.Name : null));
 
 
 
 
-             CreateMap<Employee, EmployeeDetailsDTO>().ForMember(d => d.Gender, options => options.MapFrom(e => e.Gender))
+                CreateMap<Employee, EmployeeDetailsDTO>().ForMember(d => d.Gender, options => options.MapFrom(e => e.Gender))
                 .ForMember(d => d.EmployeeType, options => options.MapFrom(e => e.EmployeeType))
-                .ForMember(d=>d.HiringDate , options=>options.MapFrom(e=>DateOnly.FromDateTime(e.HiringDate)));
+                .ForMember(d=>d.HiringDate , options=>options.MapFrom(e=>DateOnly.FromDateTime(e.HiringDate)))
+                .ForMember(d => d.Department, options => options.MapFrom(e => e.Department != null ? e.Department.Name : null));
 
 
 
 
 
-             CreateMap<CreatedEmployeeDto, Employee>()
+
+            CreateMap<CreatedEmployeeDto, Employee>()
                  .ForMember(d => d.HiringDate, options => options.MapFrom(e => e.HiringDate.ToDateTime( TimeOnly.MinValue)));
    
 

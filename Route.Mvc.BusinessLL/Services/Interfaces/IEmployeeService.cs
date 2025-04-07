@@ -11,7 +11,7 @@ namespace Route.Mvc.BusinessLL.Services.Interfaces
     {
         int AddEmployee(CreatedEmployeeDto createdEmployeeDto);
         bool DeleteEmployee(int id);
-        IEnumerable<EmployeeDto> GetAllEmployees();
+        IEnumerable<EmployeeDto> GetAllEmployees(string? EmployeeSearchName);
         EmployeeDetailsDTO? GetEmployeeById(int id);
         int UpdateEmployee(UpdatedEmployeeDto EmployeeDto);
     }

@@ -9,12 +9,20 @@ namespace Route.Mvc.PL.Controllers
     public class DepartmentController(IDepartmentService _departmentService
         , ILogger<DepartmentController> _logger , IWebHostEnvironment _environment) : Controller
     {
+
+
         #region Index()
+
+
         public IActionResult Index()
         {
+             
             var departments = _departmentService.GetAllDepartments();
             return View(departments);
         } 
+
+
+
         #endregion
 
         #region Create Department
@@ -29,7 +37,7 @@ namespace Route.Mvc.PL.Controllers
 
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        public IActionResult Create(CreatedDepartmentDto departmentDto)
+        public IActionResult Create(DepartmentViewModel departmentViewModel)
         {
 
             if (ModelState.IsValid)
@@ -37,16 +45,27 @@ namespace Route.Mvc.PL.Controllers
 
                 try
                 {
+
+                    var departmentDto = new CreatedDepartmentDto()
+                    {
+                        Name = departmentViewModel.Name,
+                        Code = departmentViewModel.Code,
+                        Description = departmentViewModel.Description,
+                        DateOfCreation = departmentViewModel.DateOfCreation,
+                    };
+
+                    string message;
+
                   var result =   _departmentService.AddDepartment(departmentDto);
                     if (result>0)
-                    {
-                        return RedirectToAction(nameof(Index));
-                        
-                    }
+                         message = $"Department {departmentViewModel.Name} Created Successfully";
                     else
                     {
-                        ModelState.AddModelError(string.Empty,"Department Cannot be Created");
+                        message = $"Department {departmentViewModel.Name} Cannot be Created";
                     }
+                    TempData["message"] = message;
+                    return RedirectToAction(nameof(Index));
+                 
 
                 }
                 catch(Exception ex)
@@ -72,7 +91,7 @@ namespace Route.Mvc.PL.Controllers
 
             }
            
-                return View(departmentDto);
+                return View(departmentViewModel);
                 
            
 
@@ -132,7 +151,7 @@ namespace Route.Mvc.PL.Controllers
             var department = _departmentService.GetDepartmentById(id.Value);
 
             if (department is null) return NotFound();
-            var departmentViewModel = new DepartmentEditViewModel()
+            var departmentViewModel = new DepartmentViewModel()
             {
                 Name = department.Name,
                 Code = department.Code,
@@ -150,7 +169,7 @@ namespace Route.Mvc.PL.Controllers
         [HttpPost]
         //[ValidateAntiForgeryToken]
 
-        public IActionResult Edit(DepartmentEditViewModel viewModel , [FromRoute]int id)
+        public IActionResult Edit(DepartmentViewModel viewModel , [FromRoute]int id)
         {
          
             if (ModelState.IsValid)

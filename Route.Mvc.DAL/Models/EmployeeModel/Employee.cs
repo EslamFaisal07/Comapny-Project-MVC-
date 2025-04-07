@@ -1,4 +1,5 @@
-﻿using Route.Mvc.DAL.Models.Shared;
+﻿using Route.Mvc.DAL.Models.DepartmentModel;
+using Route.Mvc.DAL.Models.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +30,11 @@ namespace Route.Mvc.DAL.Models.EmployeeModel
         public Gender Gender { get; set; }
 
         public EmployeeType EmployeeType { get; set; }
+
+
+        public int? DepartmentId { get; set; }
+
+        public virtual Department? Department { get; set; }
 
     }
 }

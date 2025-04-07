@@ -39,6 +39,8 @@ namespace Route.Mvc.BusinessLL.DataTransferObjects.Employee
 
         public int LastModifiedBy { get; set; }
         public DateTime LastModifiedOn { get; set; }
+        public int? DepartmentId { get; set; }
+        public string? Department { get; set; }
 
     }
 }

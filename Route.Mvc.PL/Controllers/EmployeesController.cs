@@ -4,21 +4,33 @@ using Route.Mvc.BusinessLL.Services.Classes;
 using Route.Mvc.BusinessLL.Services.Interfaces;
 using Route.Mvc.DAL.Models.EmployeeModel;
 using Route.Mvc.DAL.Models.Shared;
+using Route.Mvc.PL.ViewModels.EmployessViewModel;
 
 namespace Route.Mvc.PL.Controllers
 {
     public class EmployeesController(IEmployeeService _employeeService , ILogger<EmployeesController> _logger , IWebHostEnvironment _environment) : Controller
     {
-        public IActionResult Index()
+
+
+        public IActionResult Index(string? EmployeeSearchName)
         {
-            var employees = _employeeService.GetAllEmployees();
+            var employees = _employeeService.GetAllEmployees(EmployeeSearchName);
             return View(employees);
         }
+
+
+
+
+
+
+
+
 
         #region Create Employee
         [HttpGet]
         public IActionResult Create()
         {
+
             return View();
         }
 
@@ -26,21 +38,42 @@ namespace Route.Mvc.PL.Controllers
         [HttpPost]
         //[ValidateAntiForgeryToken]
 
-        public IActionResult Create(CreatedEmployeeDto createdEmployeeDto)
+        public IActionResult Create(EmployeeViewModel employeeViewModel)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
+                    var createdEmployeeDto = new CreatedEmployeeDto()
+                    {
+                        Name = employeeViewModel.Name,
+                        Age = employeeViewModel.Age,
+                        Address = employeeViewModel.Address,
+                        Salary = employeeViewModel.Salary,
+                        IsActive = employeeViewModel.IsActive,
+                        Email = employeeViewModel.Email,
+                        PhoneNumber = employeeViewModel.PhoneNumber,
+                        EmployeeType = employeeViewModel.EmployeeType,
+                        Gender= employeeViewModel.Gender,
+                        HiringDate = employeeViewModel.HiringDate,
+                        DepartmentId = employeeViewModel.DepartmentId,
+
+
+                    };
+                    string message;
                     int result = _employeeService.AddEmployee(createdEmployeeDto);
                     if (result > 0)
                     {
-                        return RedirectToAction(nameof(Index));
+                        message = $"Employee {employeeViewModel.Name} Created Successfully";
+                        TempData["message"] = message;
+
                     }
                     else
                     {
-                        ModelState.AddModelError("", "Employee not created");
+                       message = $"Employee {employeeViewModel.Name}  Cannot be Created";
+                        TempData["message"] = message;
                     }
+                    return RedirectToAction(nameof(Index));
 
                 }
                 catch (Exception ex)
@@ -60,7 +93,7 @@ namespace Route.Mvc.PL.Controllers
                 }
             }
 
-            return View(createdEmployeeDto);
+            return View(employeeViewModel);
 
 
         }
@@ -103,11 +136,11 @@ namespace Route.Mvc.PL.Controllers
             {
                 return NotFound();
             }
-            var employeeDto = new UpdatedEmployeeDto()
+            var employeeDto = new EmployeeViewModel()
             {
-                Id = employee.Id,
+                //Id = employee.Id,
                 Name = employee.Name,
-                Age = employee.Age,
+                Age = employee.Age.Value,
                 Address = employee.Address,
                 Salary = employee.Salary,
                 IsActive = employee.IsActive,
@@ -116,6 +149,7 @@ namespace Route.Mvc.PL.Controllers
                 HiringDate = employee.HiringDate,
                 Gender = Enum.Parse<Gender>(employee.Gender),
                 EmployeeType = Enum.Parse<EmployeeType>(employee.EmployeeType),
+                DepartmentId = employee.DepartmentId
             };
             return View(employeeDto);
 
@@ -124,16 +158,34 @@ namespace Route.Mvc.PL.Controllers
         [HttpPost]
         //[ValidateAntiForgeryToken]
 
-        public IActionResult Edit(UpdatedEmployeeDto updatedEmployeeDto, [FromRoute] int? id )
+        public IActionResult Edit(EmployeeViewModel employeeViewModel, [FromRoute] int? id )
         {
-            if (!id.HasValue || id != updatedEmployeeDto.Id)
-            {
-                return BadRequest();
-            }
+            if (!id.HasValue) return BadRequest();  
+
             if (ModelState.IsValid)
             {
                 try
                 {
+
+                    var updatedEmployeeDto = new UpdatedEmployeeDto()
+                    {
+                        Id = id.Value,
+                        Name = employeeViewModel.Name,
+                        Age = employeeViewModel.Age,
+                        Address = employeeViewModel.Address,
+                        Salary = employeeViewModel.Salary,
+                        IsActive = employeeViewModel.IsActive,
+                        Email = employeeViewModel.Email,
+                        PhoneNumber = employeeViewModel.PhoneNumber,
+                        HiringDate =employeeViewModel.HiringDate,
+                        Gender = employeeViewModel.Gender,
+                        EmployeeType = employeeViewModel.EmployeeType,
+                        DepartmentId = employeeViewModel.DepartmentId
+
+
+                    };
+
+
                     int result = _employeeService.UpdateEmployee(updatedEmployeeDto);
                     if (result > 0)
                     {
@@ -152,7 +204,7 @@ namespace Route.Mvc.PL.Controllers
                     if (_environment.IsDevelopment())
                     {
                         ModelState.AddModelError("", ex.Message);
-                        return View(updatedEmployeeDto);
+                        return View(employeeViewModel);
                     }
                     else
                     {
@@ -166,7 +218,7 @@ namespace Route.Mvc.PL.Controllers
 
 
 
-            return View(updatedEmployeeDto);
+            return View(employeeViewModel);
 
         }
 
