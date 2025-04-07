@@ -12,7 +12,7 @@ namespace Route.Mvc.BusinessLL.Services.Interfaces
         int AddEmployee(CreatedEmployeeDto createdEmployeeDto);
         bool DeleteEmployee(int id);
         IEnumerable<EmployeeDto> GetAllEmployees();
-        EmployeeDetailsDTO GetEmployeeById(int id);
+        EmployeeDetailsDTO? GetEmployeeById(int id);
         int UpdateEmployee(UpdatedEmployeeDto EmployeeDto);
     }
 }

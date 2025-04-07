@@ -1,4 +1,7 @@
+using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Route.Mvc.BusinessLL.Profiles;
 using Route.Mvc.BusinessLL.Services.Classes;
 using Route.Mvc.BusinessLL.Services.Interfaces;
 using Route.Mvc.DAL.Data.Contexts;
@@ -14,8 +17,11 @@ namespace Route.Mvc.PL
             var builder = WebApplication.CreateBuilder(args);
 
             #region  Add services to the container
-          
-            builder.Services.AddControllersWithViews();
+
+            builder.Services.AddControllersWithViews(options =>
+            {
+                options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+            });
 
             builder.Services.AddDbContext<ApplicationDbContexts>(options =>
             {
@@ -30,7 +36,7 @@ namespace Route.Mvc.PL
             builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 
-
+            builder.Services.AddAutoMapper(M=>M.AddProfile(new MappingProfile()));
 
 
 
