@@ -1,10 +1,12 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Route.Mvc.BusinessLL.Profiles;
 using Route.Mvc.BusinessLL.Services.Classes;
 using Route.Mvc.BusinessLL.Services.Interfaces;
 using Route.Mvc.DAL.Data.Contexts;
+using Route.Mvc.DAL.Models;
 using Route.Mvc.DAL.Repositories.Classes;
 using Route.Mvc.DAL.Repositories.Interfaces;
 
@@ -30,15 +32,17 @@ namespace Route.Mvc.PL
             });
 
 
-            builder.Services.AddScoped<IDepartmentRepository , DepartmentRepository>();
+            //builder.Services.AddScoped<IDepartmentRepository , DepartmentRepository>();
             builder.Services.AddScoped<IDepartmentService , DepartmentService>();
+            builder.Services.AddScoped<IAttachmentService,AttachmentServices >();
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-
-            builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            //builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 
             builder.Services.AddAutoMapper(M=>M.AddProfile(new MappingProfile()));
-
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+       .AddEntityFrameworkStores<ApplicationDbContexts>();
 
 
 
@@ -65,13 +69,13 @@ namespace Route.Mvc.PL
 
             app.UseRouting();
 
-            //app.UseAuthentication();
+            app.UseAuthentication();
 
-            //app.UseAuthorization();
+            app.UseAuthorization();
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Account}/{action=Register}/{id?}");
 
             #endregion
 

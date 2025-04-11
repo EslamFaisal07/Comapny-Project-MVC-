@@ -1,5 +1,4 @@
-﻿
-
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @model EmployeeViewModel
 @inject IDepartmentService departmentService
 @{
@@ -18,6 +17,17 @@
     <input asp-for="Name" class="form-control" />
     <span asp-validation-for="Name" class="text-danger"></span>
 </div>
+
+
+
+<div class="form-group mb-3 col-6">
+    <label class="form-label" asp-for="Image"></label>
+    <input asp-for="Image" class="form-control" value="@Model.Image" />
+    <span asp-validation-for="Image" class="text-danger"></span>
+</div>
+
+
+
 <div class="form-group mb-3 col-6">
     <label class="form-label" asp-for="Email"></label>
     <input asp-for="Email" class="form-control" />
@@ -61,17 +71,27 @@
 
 
 
-<div class="form-group mb-3 col-6 ">
+@* <div class="form-group mb-3 col-6 "> *@
 
-    <label asp-for="EmployeeType" class="form-label"></label>
-    <select asp-for="EmployeeType" class="form-control" asp-items="@Html.GetEnumSelectList<EmployeeType>()">
-        <option value="">Select Employee Type</option>
+@*     <label asp-for="EmployeeType" class="form-label"></label> *@
+@*     <select asp-for="EmployeeType" class="form-control" asp-items="@Html.GetEnumSelectList<EmployeeType>()"> *@
+@*         <option value="">Select Employee Type</option> *@
+@*     </select> *@
+@*     <span asp-validation-for="EmployeeType" class="text-danger"></span> *@
+
+@* </div> *@
+
+
+<div class="form-group mb-3 col-6">
+    <label class="form-label" asp-for="EmployeeType"></label>
+    <select class="form-control" asp-for="EmployeeType" asp-items="Html.GetEnumSelectList<EmployeeType>()">
+        <option value="">
+            Select Employee Type
+        </option>
+
     </select>
     <span asp-validation-for="EmployeeType" class="text-danger"></span>
-
 </div>
-
-
 
 
 

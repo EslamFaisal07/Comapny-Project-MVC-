@@ -1,4 +1,5 @@
-﻿using Route.Mvc.DAL.Models.EmployeeModel;
+﻿using Microsoft.AspNetCore.Http;
+using Route.Mvc.DAL.Models.EmployeeModel;
 using Route.Mvc.DAL.Models.Shared;
 using System;
 using System.Collections.Generic;
@@ -46,6 +47,8 @@ namespace Route.Mvc.BusinessLL.DataTransferObjects.Employee
         [Display(Name = "Department")]
 
         public int? DepartmentId { get; set; }
+
+        public IFormFile? Image { get; set; } 
 
 
     }

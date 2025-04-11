@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Route.Mvc.DAL.Repositories.Classes
 {
-    public class GenericRepository<T>(ApplicationDbContexts _dbContext) : IGenericRepository<T> where T : BaseEntity
+    public class GenericRepository<T>(  ApplicationDbContexts _dbContext) : IGenericRepository<T> where T : BaseEntity
     {
 
         public IEnumerable<T> GetAll(bool WithTracking = false)
@@ -34,25 +34,25 @@ namespace Route.Mvc.DAL.Repositories.Classes
 
 
 
-        public int Update(T entity)
+        public void Update(T entity)
         {
             _dbContext.Set<T>().Update(entity);
-            return _dbContext.SaveChanges();
+            
         }
 
 
 
-        public int Remove(T entity)
+        public void Remove(T entity)
         {
             _dbContext.Set<T>().Remove(entity);
-            return _dbContext.SaveChanges();
+           
         }
 
 
-        public int Add(T entity)
+        public void Add(T entity)
         {
             _dbContext.Set<T>().Add(entity);
-            return _dbContext.SaveChanges();
+           
         }
 
         public IEnumerable<TResult> GetAll<TResult>(Expression<Func<T, TResult>> selector)

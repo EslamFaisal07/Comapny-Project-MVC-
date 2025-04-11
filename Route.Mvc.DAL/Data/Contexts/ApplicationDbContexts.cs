@@ -1,4 +1,5 @@
-﻿using Route.Mvc.DAL.Models.DepartmentModel;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Route.Mvc.DAL.Models.DepartmentModel;
 using Route.Mvc.DAL.Models.EmployeeModel;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Route.Mvc.DAL.Data.Contexts
 {
-    public class ApplicationDbContexts(DbContextOptions<ApplicationDbContexts> options) : DbContext(options)
+    public class ApplicationDbContexts(DbContextOptions<ApplicationDbContexts> options) : IdentityDbContext<ApplicationUser>(options)
     {
 
 
@@ -22,6 +23,8 @@ namespace Route.Mvc.DAL.Data.Contexts
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+            base.OnModelCreating(modelBuilder);
         }
 
 

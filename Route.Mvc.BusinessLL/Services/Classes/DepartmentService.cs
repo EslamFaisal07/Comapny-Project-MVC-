@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace Route.Mvc.BusinessLL.Services.Classes
 {
-    public class DepartmentService(IDepartmentRepository _departmentRepository) : IDepartmentService
+    public class DepartmentService(  IUnitOfWork _unitOfWork) : IDepartmentService
     {
 
         public IEnumerable<DepartmentDto> GetAllDepartments()
         {
-            var departments = _departmentRepository.GetAll();
+            var departments = _unitOfWork.DepartmentRepository.GetAll();
             return departments.Select(d => d.ToDepartmentDto());
         }
 
@@ -23,7 +23,7 @@ namespace Route.Mvc.BusinessLL.Services.Classes
         public DepartmentDetailsDTO GetDepartmentById(int id)
         {
 
-            var department = _departmentRepository.GetById(id);
+            var department = _unitOfWork.DepartmentRepository.GetById(id);
 
             if (department is null)
             {
@@ -44,8 +44,8 @@ namespace Route.Mvc.BusinessLL.Services.Classes
         public int AddDepartment(CreatedDepartmentDto createdDepartmentDto)
         {
             var department = createdDepartmentDto.ToEntity();
-            return _departmentRepository.Add(department);
-
+             _unitOfWork.DepartmentRepository.Add(department);
+            return _unitOfWork.SaveChange();
         }
 
 
@@ -54,14 +54,23 @@ namespace Route.Mvc.BusinessLL.Services.Classes
         {
 
 
-            return _departmentRepository.Update(departmentDto.ToEntity());
+          _unitOfWork.DepartmentRepository.Update(departmentDto.ToEntity());
+            var result = _unitOfWork.SaveChange();
+            if (result >0)
+            {
+                return result;
+            }
+            else
+            { 
+                return -1;
+            }
         }
 
 
 
         public bool DeleteDepartment(int id)
         {
-            var dept = _departmentRepository.GetById(id);
+            var dept = _unitOfWork.DepartmentRepository.GetById(id);
             if (dept is null)
             {
                 return false;
@@ -69,8 +78,16 @@ namespace Route.Mvc.BusinessLL.Services.Classes
             else
             {
 
-                int result = _departmentRepository.Remove(dept);
-                return result > 0 ? true : false;
+                _unitOfWork.DepartmentRepository.Remove(dept);
+                var result = _unitOfWork.SaveChange();
+                if (result > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
 
 
