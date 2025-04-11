@@ -26,6 +26,7 @@ namespace Route.Mvc.PL
             builder.Services.AddDbContext<ApplicationDbContexts>(options =>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+                options.UseLazyLoadingProxies();
             });
 
 

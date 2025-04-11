@@ -1,6 +1,6 @@
 ﻿namespace Route.Mvc.PL.ViewModels.DepartmentsViewModels
 {
-    public class DepartmentEditViewModel
+    public class DepartmentViewModel
     {
        
         public string Name { get; set; } = string.Empty;

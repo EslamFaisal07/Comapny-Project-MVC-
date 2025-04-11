@@ -1,4 +1,5 @@
-﻿using Route.Mvc.DAL.Models.Shared;
+﻿using Route.Mvc.DAL.Models.EmployeeModel;
+using Route.Mvc.DAL.Models.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace Route.Mvc.DAL.Models.DepartmentModel
         public string? Description { get; set; }
 
 
-
+        public virtual ICollection<Employee> Employees { get; set; } = new HashSet<Employee>();
 
 
 

@@ -6,6 +6,7 @@ using Route.Mvc.DAL.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -54,17 +55,19 @@ namespace Route.Mvc.DAL.Repositories.Classes
             return _dbContext.SaveChanges();
         }
 
-   
+        public IEnumerable<TResult> GetAll<TResult>(Expression<Func<T, TResult>> selector)
+        {
+            return _dbContext.Set<T>()
+                             .Where(e => e.IsDeleted != true)
+                             .Select(selector)
+                             .ToList();
+        }
 
-
-
-
-
-
-
-
-
-
-
+        public IEnumerable<T> GetAll(Expression<Func<T, bool>> predicate)
+        {
+            return _dbContext.Set<T>()
+                             .Where(predicate)
+                             .ToList();
+        }
     }
 }

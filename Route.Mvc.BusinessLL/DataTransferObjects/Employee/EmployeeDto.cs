@@ -30,5 +30,8 @@ namespace Route.Mvc.BusinessLL.DataTransferObjects.Employee
         public string Gender { get; set; }
         [Display(Name = "Employee Type")]
         public string EmployeeType { get; set; }
+
+        [Display(Name = "Department")]
+        public string? Department { get; set; }
     }
 }
