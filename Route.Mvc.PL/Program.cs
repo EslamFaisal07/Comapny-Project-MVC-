@@ -41,8 +41,15 @@ namespace Route.Mvc.PL
             builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 
             builder.Services.AddAutoMapper(M=>M.AddProfile(new MappingProfile()));
-            builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
-       .AddEntityFrameworkStores<ApplicationDbContexts>();
+
+
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+            {
+                options.User.RequireUniqueEmail = true;
+            })
+             .AddEntityFrameworkStores<ApplicationDbContexts>()
+             .AddDefaultTokenProviders();
+
 
 
 
