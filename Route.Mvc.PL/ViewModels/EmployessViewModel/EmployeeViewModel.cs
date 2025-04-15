@@ -44,7 +44,7 @@ namespace Route.Mvc.PL.ViewModels.EmployessViewModel
 
         public int? DepartmentId { get; set; }
 
-
+        public IFormFile? Image { get; set; }
 
 
 

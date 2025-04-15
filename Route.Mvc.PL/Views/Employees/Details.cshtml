@@ -4,6 +4,19 @@
 }
 
 <h1 class="my-5 w-75">Employee Details</h1>
+
+@if (string.IsNullOrEmpty(Model.imageName))
+{
+    <p class="alert alert-warning">No image Avaliable</p>
+}
+else
+{
+    <div class="d-flex justify-content-center align-items-center ">
+        <img class=" rounded-circle " src="~/Files/Images/@Model.imageName" width="200px" height="200px" alt="Image"   />
+    </div>
+}
+
+
 <ul class="nav nav-tabs" id="employeeTabs" role="tablist">
     <li class="nav-item" role="presentation">
         <a class="nav-link active" id="general-tab" data-bs-toggle="tab" href="#general" role="tab" aria-controls="general" aria-selected="true">General</a>

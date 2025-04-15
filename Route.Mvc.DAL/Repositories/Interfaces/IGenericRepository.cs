@@ -15,7 +15,7 @@ namespace Route.Mvc.DAL.Repositories.Interfaces
 
 
 
-        int Add(T entity);
+        void Add(T entity);
         IEnumerable<T> GetAll(bool WithTracking = false);
 
         IEnumerable<TResult> GetAll<TResult>(Expression<Func<T, TResult>> selector);
@@ -24,8 +24,8 @@ namespace Route.Mvc.DAL.Repositories.Interfaces
         IEnumerable<T> GetAll(Expression<Func<T,bool>> predicate);
 
         T? GetById(int id);
-        int Remove(T entity);
-        int Update(T entity);
+        void Remove(T entity);
+        void Update(T entity);
 
 
 

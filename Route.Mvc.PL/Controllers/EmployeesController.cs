@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Route.Mvc.BusinessLL.DataTransferObjects.Employee;
 using Route.Mvc.BusinessLL.Services.Classes;
 using Route.Mvc.BusinessLL.Services.Interfaces;
@@ -8,6 +9,7 @@ using Route.Mvc.PL.ViewModels.EmployessViewModel;
 
 namespace Route.Mvc.PL.Controllers
 {
+    [Authorize]
     public class EmployeesController(IEmployeeService _employeeService , ILogger<EmployeesController> _logger , IWebHostEnvironment _environment) : Controller
     {
 
@@ -57,6 +59,7 @@ namespace Route.Mvc.PL.Controllers
                         Gender= employeeViewModel.Gender,
                         HiringDate = employeeViewModel.HiringDate,
                         DepartmentId = employeeViewModel.DepartmentId,
+                        Image = employeeViewModel.Image
 
 
                     };
@@ -180,7 +183,8 @@ namespace Route.Mvc.PL.Controllers
                         HiringDate =employeeViewModel.HiringDate,
                         Gender = employeeViewModel.Gender,
                         EmployeeType = employeeViewModel.EmployeeType,
-                        DepartmentId = employeeViewModel.DepartmentId
+                        DepartmentId = employeeViewModel.DepartmentId,
+                        Image = employeeViewModel.Image
 
 
                     };

@@ -1,12 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
+
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+
 
 using Route.Mvc.BusinessLL.DataTransferObjects.Department;
 using Route.Mvc.BusinessLL.Services.Interfaces;
 using Route.Mvc.PL.ViewModels.DepartmentsViewModels;
 
+
 namespace Route.Mvc.PL.Controllers
 {
-
+    [Authorize]
     public class DepartmentController(IDepartmentService _departmentService
         , ILogger<DepartmentController> _logger , IWebHostEnvironment _environment) : Controller
     {
