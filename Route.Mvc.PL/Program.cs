@@ -9,6 +9,8 @@ using Route.Mvc.DAL.Data.Contexts;
 using Route.Mvc.DAL.Models;
 using Route.Mvc.DAL.Repositories.Classes;
 using Route.Mvc.DAL.Repositories.Interfaces;
+using Route.Mvc.PL.Helpers;
+using Route.Mvc.PL.Settings;
 
 namespace Route.Mvc.PL
 {
@@ -51,6 +53,8 @@ namespace Route.Mvc.PL
              .AddDefaultTokenProviders();
 
 
+            builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
+            builder.Services.AddTransient<IMailService, MailService>();
 
 
             #endregion

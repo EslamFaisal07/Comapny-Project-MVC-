@@ -3,8 +3,15 @@
 @inject IDepartmentService departmentService
 @{
 
+    SelectList departments = null!;
 
-    var departments = new SelectList(departmentService.GetAllDepartments() , nameof(DepartmentDto.DeptId) , nameof(DepartmentDto.Name));
+    var departmentsList = departmentService.GetAllDepartments()?.ToList();
+    if (departmentsList != null && departmentsList.Any())
+    {
+        departments = new SelectList(departmentsList, nameof(DepartmentDto.DeptId), nameof(DepartmentDto.Name));
+    }
+
+    // var departments = new SelectList(departmentService.GetAllDepartments() , nameof(DepartmentDto.DeptId) , nameof(DepartmentDto.Name));
 
 
 
@@ -22,7 +29,9 @@
 
 <div class="form-group mb-3 col-6">
     <label class="form-label" asp-for="Image"></label>
-    <input asp-for="Image" class="form-control" value="@Model.Image" />
+    @* <input asp-for="Image" class="form-control" value="@Model.Image" /> *@
+    <input asp-for="Image" class="form-control" value="@(Model?.Image )?? @string.Empty" />
+
     <span asp-validation-for="Image" class="text-danger"></span>
 </div>
 
@@ -71,15 +80,7 @@
 
 
 
-@* <div class="form-group mb-3 col-6 "> *@
 
-@*     <label asp-for="EmployeeType" class="form-label"></label> *@
-@*     <select asp-for="EmployeeType" class="form-control" asp-items="@Html.GetEnumSelectList<EmployeeType>()"> *@
-@*         <option value="">Select Employee Type</option> *@
-@*     </select> *@
-@*     <span asp-validation-for="EmployeeType" class="text-danger"></span> *@
-
-@* </div> *@
 
 
 <div class="form-group mb-3 col-6">

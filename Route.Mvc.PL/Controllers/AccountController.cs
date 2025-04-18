@@ -1,12 +1,15 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using MailKit;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Route.Mvc.DAL.Models;
 using Route.Mvc.PL.Utilites;
 using Route.Mvc.PL.ViewModels;
+using Route.Mvc.PL.Helpers;
+
 
 namespace Route.Mvc.PL.Controllers
 {
-    public class AccountController(UserManager<ApplicationUser> _userManager, SignInManager<ApplicationUser> _signInManager) : Controller
+    public class AccountController(Route.Mvc.PL.Helpers.IMailService _mailService, UserManager<ApplicationUser> _userManager, SignInManager<ApplicationUser> _signInManager) : Controller
     {
         #region Register
         [HttpGet]
@@ -138,7 +141,11 @@ namespace Route.Mvc.PL.Controllers
 
                     };
 
-                    EmailSettings.SendEmail(email);
+                    //EmailSettings.SendEmail(email);
+
+                    _mailService.Send(email);
+
+
                     return RedirectToAction("CheckYourInbox");
 
 
