@@ -5,6 +5,8 @@ using Route.Mvc.DAL.Models;
 using Route.Mvc.PL.Utilites;
 using Route.Mvc.PL.ViewModels;
 using Route.Mvc.PL.Helpers;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Google;
 
 
 namespace Route.Mvc.PL.Controllers
@@ -88,6 +90,47 @@ namespace Route.Mvc.PL.Controllers
             }
 
         }
+
+
+        public IActionResult GoogleLogin()
+        {
+            var prop = new AuthenticationProperties()
+            {
+                RedirectUri = Url.Action("GoogleResponse")
+
+            };
+            return Challenge(prop,GoogleDefaults.AuthenticationScheme);
+        }
+
+
+
+        public async Task<IActionResult> GoogleResponse()
+        {
+            var result = await HttpContext.AuthenticateAsync(GoogleDefaults.AuthenticationScheme);
+            var claims = result.Principal.Identities.FirstOrDefault().Claims.Select(c=>new
+            {
+                c.Issuer,
+                c.OriginalIssuer,
+                c.Type,
+                c.Value
+            });
+
+            return RedirectToAction("Index" , "Home");
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
 
         #endregion
 

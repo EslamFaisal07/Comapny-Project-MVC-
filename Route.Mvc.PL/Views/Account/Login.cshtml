@@ -5,8 +5,8 @@
 }
 
 
-<div class="main-agileinfo">
-    <div class="agileits-top">
+<div class="main-agileinfo ">
+    <div class="agileits-top text-center">
         <form asp-action="Login" method="post">
             <div asp-validation-summary="All"></div>
 
@@ -25,10 +25,30 @@
                 <div class="clear"> </div>
             </div>
             <input type="submit" value="SIGNIN">
+
         </form>
         <p>Don't have an Account? <a asp-action="Register"> Register Now!</a></p>
-        <p> <a asp-action="ForgetPassword"> Forget Password!</a></p>
+        <p class="mb-3"> <a asp-action="ForgetPassword" > Forget Password!</a></p>
 
+            @* <div class="d-flex justify-content-center align-items-center gap-2"> *@
+
+            @* <a class="text-white text-center" asp-action="GoogleLogin">Login With Google </a> *@
+            
+            @* </div> *@
+
+         <div class="text-center ">
+            <a asp-action="GoogleLogin"
+               class="btn btn-light border d-inline-flex align-items-center gap-2 px-4 py-2 rounded shadow-sm">
+                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+                     alt="Google Icon"
+                     width="15" height="15">
+                Login With Google
+            </a>
+        </div> 
+
+
+   
+      
 
     </div>
 </div>
