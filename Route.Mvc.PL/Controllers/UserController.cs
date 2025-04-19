@@ -119,8 +119,8 @@ namespace Route.Mvc.PL.Controllers
                 return NotFound();
             }
 
-                user.Result.FristName = userViewModel.FName;
-                user.Result.LastName = userViewModel.LName;
+            user.Result.FristName = userViewModel.FName;
+            user.Result.LastName = userViewModel.LName;
             user.Result.Email = userViewModel.Email;
             user.Result.PhoneNumber = userViewModel.PhoneNumber;
 
