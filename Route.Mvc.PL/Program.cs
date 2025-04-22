@@ -76,7 +76,7 @@ namespace Route.Mvc.PL
             app.MapControllerRoute(
                 name: "default",
                 //pattern: "{controller=Account}/{action=Register}/{id?}");
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Account}/{action=Register}/{id?}");
 
             #endregion
 
