@@ -12,7 +12,7 @@ namespace Route.Mvc.PL.Controllers
 {
     [Authorize]
     public class DepartmentController(IDepartmentService _departmentService
-        , ILogger<DepartmentController> _logger , IWebHostEnvironment _environment) : Controller
+        , ILogger<DepartmentController> _logger, IWebHostEnvironment _environment) : Controller
     {
 
 
@@ -21,10 +21,10 @@ namespace Route.Mvc.PL.Controllers
 
         public IActionResult Index()
         {
-             
+
             var departments = _departmentService.GetAllDepartments();
             return View(departments);
-        } 
+        }
 
 
 
@@ -61,30 +61,30 @@ namespace Route.Mvc.PL.Controllers
 
                     string message;
 
-                  var result =   _departmentService.AddDepartment(departmentDto);
-                    if (result>0)
-                         message = $"Department {departmentViewModel.Name} Created Successfully";
+                    var result = _departmentService.AddDepartment(departmentDto);
+                    if (result > 0)
+                        message = $"Department {departmentViewModel.Name} Created Successfully";
                     else
                     {
                         message = $"Department {departmentViewModel.Name} Cannot be Created";
                     }
                     TempData["message"] = message;
                     return RedirectToAction(nameof(Index));
-                 
+
 
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     if (_environment.IsDevelopment())
                     {
                         ModelState.AddModelError(string.Empty, ex.Message);
 
-                        
+
                     }
                     else
                     {
                         _logger.LogError(ex.Message);
-                      
+
 
                     }
 
@@ -95,10 +95,10 @@ namespace Route.Mvc.PL.Controllers
 
 
             }
-           
-                return View(departmentViewModel);
-                
-           
+
+            return View(departmentViewModel);
+
+
 
 
 
@@ -122,7 +122,7 @@ namespace Route.Mvc.PL.Controllers
 
             }
             var department = _departmentService.GetDepartmentById(id.Value);
-            if (department is null )
+            if (department is null)
             {
                 return NotFound();
             }
@@ -149,10 +149,10 @@ namespace Route.Mvc.PL.Controllers
 
         [HttpGet]
 
-        public ActionResult Edit(int? id) 
+        public ActionResult Edit(int? id)
         {
-        
-            if(!id.HasValue) return BadRequest();
+
+            if (!id.HasValue) return BadRequest();
             var department = _departmentService.GetDepartmentById(id.Value);
 
             if (department is null) return NotFound();
@@ -167,16 +167,16 @@ namespace Route.Mvc.PL.Controllers
             return View(departmentViewModel);
 
 
-        
+
         }
 
 
         [HttpPost]
         //[ValidateAntiForgeryToken]
 
-        public IActionResult Edit(DepartmentViewModel viewModel , [FromRoute]int id)
+        public IActionResult Edit(DepartmentViewModel viewModel, [FromRoute] int id)
         {
-         
+
             if (ModelState.IsValid)
             {
                 try
@@ -200,7 +200,7 @@ namespace Route.Mvc.PL.Controllers
                     else
                     {
                         ModelState.AddModelError(string.Empty, "Department Cannot be Updated");
-                       
+
                     }
 
 
@@ -214,7 +214,7 @@ namespace Route.Mvc.PL.Controllers
                     {
                         ModelState.AddModelError(string.Empty, ex.Message);
 
-                     
+
 
                     }
                     else
@@ -226,7 +226,7 @@ namespace Route.Mvc.PL.Controllers
                 }
             }
             return View(viewModel);
-           
+
         }
 
 
@@ -239,9 +239,9 @@ namespace Route.Mvc.PL.Controllers
         [HttpPost]
         //[ValidateAntiForgeryToken]
 
-        public IActionResult Delete(int id) 
+        public IActionResult Delete(int id)
         {
-        if(id == 0 ) return BadRequest();
+            if (id == 0) return BadRequest();
             try
             {
                 bool deleted = _departmentService.DeleteDepartment(id);
@@ -249,10 +249,10 @@ namespace Route.Mvc.PL.Controllers
                 else
                 {
                     ModelState.AddModelError(string.Empty, "Department is not Deleted");
-                    return RedirectToAction(nameof(Delete), new {id});
+                    return RedirectToAction(nameof(Delete), new { id });
                 }
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
 
                 if (_environment.IsDevelopment())
@@ -271,6 +271,8 @@ namespace Route.Mvc.PL.Controllers
             }
 
         }
+    }
+}
 
 
 
